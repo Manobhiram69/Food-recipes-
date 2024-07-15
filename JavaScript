@@ -1,0 +1,54 @@
+const recipes = [
+  {
+    name: "Pancakes",
+    category: "breakfast",
+    ingredients: ["2 cups flour", "2 eggs", "1.5 cups milk", "2 tbsp sugar", "1 tsp salt", "2 tbsp butter"],
+    instructions: ["Mix dry ingredients together.", "Add eggs and milk.", "Stir until smooth.", "Cook on a hot griddle."]
+  },
+  {
+    name: "Spaghetti Bolognese",
+    category: "dinner",
+    ingredients: ["200g spaghetti", "100g ground beef", "1 onion", "2 cloves garlic", "400g canned tomatoes", "Salt", "Pepper"],
+    instructions: ["Cook spaghetti according to package instructions.", "Brown the beef in a pan.", "Add chopped onions and garlic.", "Pour in canned tomatoes and simmer.", "Season with salt and pepper.", "Serve over spaghetti."]
+  }
+  // Add more recipes as needed
+];
+
+const recipeContainer = document.getElementById('recipeContainer');
+const searchInput = document.getElementById('search');
+const categoryFilter = document.getElementById('categoryFilter');
+
+function displayRecipes(recipesToDisplay) {
+  recipeContainer.innerHTML = '';
+  recipesToDisplay.forEach(recipe => {
+    const recipeElement = document.createElement('div');
+    recipeElement.className = 'recipe';
+    recipeElement.innerHTML = `
+      <h2>${recipe.name}</h2>
+      <h3>Ingredients:</h3>
+      <ul>${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}</ul>
+      <h3>Instructions:</h3>
+      <ul>${recipe.instructions.map(instruction => `<li>${instruction}</li>`).join('')}</ul>
+    `;
+    recipeContainer.appendChild(recipeElement);
+  });
+}
+
+function filterRecipes() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
+  const filteredRecipes = recipes.filter(recipe => {
+    const matchesName = recipe.name.toLowerCase().includes(searchTerm);
+    const matchesCategory = selectedCategory ? recipe.category === selectedCategory : true;
+    return matchesName && matchesCategory;
+  });
+
+  displayRecipes(filteredRecipes);
+}
+
+searchInput.addEventListener('input', filterRecipes);
+categoryFilter.addEventListener('change', filterRecipes);
+
+// Initial display
+displayRecipes(recipes);
