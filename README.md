@@ -1,0 +1,1 @@
+A food recipe website is an online platform dedicated to sharing culinary instructions, tips, and inspiration. It typically offers a wide range of recipes categorized by cuisine, dietary preferences, and meal types, often accompanied by photos and user reviews for guidance and community engagement.
